@@ -4,15 +4,94 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>黑马jvm | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="JVM1. 什么是JVM1.1 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境）  1.2 好处 一次编写，到处运行 自动内存管理，垃圾回收机制 数组下标越界检查  1.3  比较 JVM  JRE  JDK的区别  二、内存结构整体架构 1、程序计数器作用用于保存JVM中下一条所要执行的指令的地址 特点 线程私有 CPU会为每个线程分配时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑马jvm">
+<meta property="og:url" content="http://example.com/2023/02/22/%E9%BB%91%E9%A9%ACjvm/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JVM1. 什么是JVM1.1 定义 Java Virtual Machine，JAVA程序的运行环境（JAVA二进制字节码的运行环境）  1.2 好处 一次编写，到处运行 自动内存管理，垃圾回收机制 数组下标越界检查  1.3  比较 JVM  JRE  JDK的区别  二、内存结构整体架构 1、程序计数器作用用于保存JVM中下一条所要执行的指令的地址 特点 线程私有 CPU会为每个线程分配时间">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/02/22/%E9%BB%91%E9%A9%ACjvm/20200608150422.png">
+<meta property="og:image" content="http://example.com/2023/02/22/%E9%BB%91%E9%A9%ACjvm/20200608150440.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150534.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150547.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150602.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150618.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150630.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150641.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150653.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150715.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150736.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150750.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150800.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150813.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150827.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150842.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150856.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150907.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150919.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150931.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150939.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150946.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608150955.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151002.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151010.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151018.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151027.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151039.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151052.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200909201212.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151100.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151109.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151119.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151129.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151140.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151150.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151201.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151211.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151222.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151229.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151239.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151249.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151300.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200910155135.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151317.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151325.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151336.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151346.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151412.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151421.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151432.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151441.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151450.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151459.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151508.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151523.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151547.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151555.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151605.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151613.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151624.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151632.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200608151640.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611205050.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611221703.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611221857.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611222029.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611223153.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611230658.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200611223441.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200613104723.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20201118204542.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200614133554.png">
+<meta property="og:image" content="https://nyimapicture.oss-cn-beijing.aliyuncs.com/img/20200614135011.png">
+<meta property="article:published_time" content="2023-02-22T07:20:05.000Z">
+<meta property="article:modified_time" content="2023-02-22T14:34:37.623Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/02/22/%E9%BB%91%E9%A9%ACjvm/20200608150422.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -69,9 +148,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-黑马jvm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-黑马jvm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/02/22/%E9%BB%91%E9%A9%ACjvm/" class="article-date">
   <time class="dt-published" datetime="2023-02-22T07:20:05.000Z" itemprop="datePublished">2023-02-22</time>
@@ -84,8 +161,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/02/22/%E9%BB%91%E9%A9%ACjvm/">黑马jvm</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      黑马jvm
     </h1>
   
 
@@ -1176,62 +1253,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/02/22/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2023-02-22T04:21:57.129Z" itemprop="datePublished">2023-02-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/02/22/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2023/02/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/02/22/hello-world/" data-id="clef66foo0000awvl1oeketdh" data-title="Hello World" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
